@@ -20,7 +20,7 @@ const tryLocalSignIn = dispatch => async(navigation)=>{
     console.log(token)
     if(token){
         dispatch({type: 'signin', payload: token});
-        navigation.navigate('HomeScreen');
+        navigation.navigate('MainFlow', { screen: 'HomeScreen' });
     }else{
         navigation.navigate('FirstOpenScreen');
     }
@@ -38,7 +38,7 @@ const signup = (dispatch) => async ({email, password, navigation}) => {
         const uid = await AsyncStorage.getItem('uid');
         dispatch({type: 'signin', payload: uid});
         //navigate main flow
-        navigation.navigate('HomeScreen');
+        navigation.navigate('MainFlow', { screen: 'HomeScreen' });
     }catch(err){
         console.log(err.message);
         dispatch({type: 'add_error', payload:'Something went wrong with sign up.'});
@@ -52,7 +52,7 @@ const signin = (dispatch) => async ({email, password, navigation}) => {
         const uid = await AsyncStorage.getItem('uid');
         dispatch({type: 'signin', payload: uid});
         //navigate main flow
-        navigation.navigate('HomeScreen');
+        navigation.navigate('MainFlow', { screen: 'HomeScreen' });
     }catch(err){
         console.log(err.message);
         dispatch({type: 'add_error', payload:'Something went wrong with sign up.'});
