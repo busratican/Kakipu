@@ -11,6 +11,8 @@ import DiscoverScreen from './src/screens/DiscoverScreen';
 import CreateNewScreen from './src/screens/CreateNewScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Icon } from 'react-native-elements';
+import StarsScreen from './src/screens/StarsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,12 +20,74 @@ const Tab = createBottomTabNavigator();
 
 function MainFlow() {
   return (
-      <Tab.Navigator>
-        <Tab.Screen name="HomeScreen" component={HomeScreen} />
-        <Tab.Screen name="DiscoverScreen" component={DiscoverScreen} />
-        <Tab.Screen name="CreateNewScreen" component={CreateNewScreen} />
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
-      </Tab.Navigator>
+    <Tab.Navigator >
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Anasayfa',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='home'
+              type='feather' />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="DiscoverScreen"
+        component={DiscoverScreen}
+        options={{
+          tabBarLabel: 'Keşfet',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='compass'
+              type='feather' />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="CreateNewScreen"
+        component={CreateNewScreen}
+        options={{
+          tabBarLabel: 'Yeni',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='pluscircleo'
+              type='antdesign' />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='StarsScreen'
+        component={StarsScreen}
+        options={{
+          tabBarLabel: 'Yıldızlar',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='staro'
+              type='antdesign' />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profil',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='user'
+              type='antdesign' />
+          ),
+        }}
+      />
+
+    </Tab.Navigator>
   );
 }
 
@@ -66,8 +130,16 @@ function App() {
               headerBackTitleVisible: false
             }} />
           <Stack.Screen
-            name="MainFlow" 
-            component={MainFlow} 
+            name="MainFlow"
+            component={MainFlow}
+            options={{
+              headerShown: true,
+              headerTitle: null,
+              headerBackTitleVisible: false,
+              gestureEnabled: false,
+              headerLeft: null
+
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
