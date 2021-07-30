@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
         marginVertical: 15,
         marginHorizontal: 5,
         width: windowWidth / 1.05,
-        height: windowHeight / 2,
+        height: windowHeight / 2.6,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -209,9 +209,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
         borderColor: '#000000',
-        borderRadius: 20,
-        borderWidth: 3,
-        borderBottomWidth: 6,
         elevation: 6,
     },
     cardTextStyle: {
