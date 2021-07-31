@@ -6,16 +6,16 @@ import { Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const SpecialButton = ({title, onPress, buttonColor}) => {
+const SpecialButton = ({title, onPress, buttonColor, width, height}) => {
     return(
         <TouchableOpacity>
             <Button
                 titleStyle = {styles.titleStyle}
-                buttonStyle={[styles.buttonStyle, {backgroundColor: buttonColor}]}
+                buttonStyle={[styles.buttonStyle, {backgroundColor: buttonColor, width: width, height: height}]}
                 title = {title}
                 onPress= {onPress}
                 raised
-                containerStyle = {styles.containerStyle}
+                containerStyle = {[styles.containerStyle, {width: width, height: height}]}
                 type= "outline"
             />
         </TouchableOpacity>

@@ -6,8 +6,6 @@ export default () => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
 
-  console.log(results);
-
   const searchApi = async (searchTerm) => {
 
     let url = '/' + searchTerm;
@@ -16,6 +14,7 @@ export default () => {
     try {
       await isbn.get(url)
         .then(response => {
+          console.log(response.data.book);
           setResults(response.data);
           setError('');
         }, error => {
