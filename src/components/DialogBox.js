@@ -1,18 +1,18 @@
-import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, {useContext} from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
-import BookDetails from './BookDetails';
+import {Context as DialogContext} from '../context/DialogBoxContext';
 
+const DialogBox = ({ dialogTitle, buttonText, onPress, results }) => {
 
-const DialogBox = ({ IsVisible, dialogTitle, buttonText, onPress, results }) => {
+    const {state: {dialogvisible}, stopdialog} = useContext(DialogContext);
 
-    console.log("IsVisible: " + IsVisible);
     return (
-        <View>
-            <Text>Returned</Text>
+        <View style = {styles.containerStyle}>
             <Dialog
-                visible={IsVisible}
+                 containerStyle = {styles.dbContainer}
+                onTouchOutside = {stopdialog}
+                visible={dialogvisible}
                 dialogAnimation={new SlideAnimation({
                     slideFrom: 'bottom',
                 })}
@@ -26,26 +26,34 @@ const DialogBox = ({ IsVisible, dialogTitle, buttonText, onPress, results }) => 
                     </DialogFooter>
                 }
             >
-                <DialogContent>
+                {Object.keys(results).length > 0 ?  <DialogContent style = {styles.contentStyle}>
                     {<View>
-                        <Text>{results.title}</Text>
-                            <FlatList
-                                data={results.image}
-                                keyExtractor={(photo) => photo}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <Image style={styles.imageStyle} source={{ uri: item }} />
-                                    );
-                                }}
-                            />
+                        <Text style={{color: 'black'}}>{results.book.title}</Text>
                     </View>}
-                </DialogContent>
+                </DialogContent> : <> </>}
+               
             </Dialog>
         </View>
     )
 
 
 }
+
+const styles = StyleSheet.create({
+    containerStyle: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    dbContainer: {
+        zIndex: 10, elevation: 10 
+    },
+    contentStyle: {
+        alignItems: 'center',
+        height: 300,
+        width: 300,
+        marginHorizontal: 25
+    }
+})
 
 
 export default DialogBox;

@@ -11,6 +11,7 @@ import DiscoverScreen from './src/screens/DiscoverScreen';
 import CreateNewScreen from './src/screens/CreateNewScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as DialogProvider } from './src/context/DialogBoxContext';
 import { Icon } from 'react-native-elements';
 import StarsScreen from './src/screens/StarsScreen';
 
@@ -20,6 +21,7 @@ const Tab = createBottomTabNavigator();
 
 function MainFlow() {
   return (
+    <DialogProvider>
     <Tab.Navigator >
       <Tab.Screen
         name="HomeScreen"
@@ -88,62 +90,65 @@ function MainFlow() {
       />
 
     </Tab.Navigator>
+    </DialogProvider>
   );
 }
 
 
 function App() {
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerTransparent: true,
-            headerTintColor: '#000',
-            headerTitleStyle: {
-              fontWeight: 'bold'
-            },
-          }}
-        >
-          <Stack.Screen
-            name="ResolveAuthScreen"
-            component={ResolveAuthScreen}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="FirstOpenScreen"
-            component={FirstOpenScreen}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{
-              headerShown: true,
-              headerTitle: null,
-              headerBackTitleVisible: null,
-            }} />
-          <Stack.Screen
-            name="RegisterScreen"
-            component={RegisterScreen}
-            options={{
-              headerShown: true,
-              headerTitle: null,
-              headerBackTitleVisible: false
-            }} />
-          <Stack.Screen
-            name="MainFlow"
-            component={MainFlow}
-            options={{
-              headerShown: true,
-              headerTitle: null,
-              headerBackTitleVisible: false,
-              gestureEnabled: false,
-              headerLeft: null
 
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerTransparent: true,
+              headerTintColor: '#000',
+              headerTitleStyle: {
+                fontWeight: 'bold'
+              },
             }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
+          >
+            <Stack.Screen
+              name="ResolveAuthScreen"
+              component={ResolveAuthScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen
+              name="FirstOpenScreen"
+              component={FirstOpenScreen}
+              options={{ headerShown: false }} />
+            <Stack.Screen
+              name="LoginScreen"
+              component={LoginScreen}
+              options={{
+                headerShown: true,
+                headerTitle: null,
+                headerBackTitleVisible: null,
+              }} />
+            <Stack.Screen
+              name="RegisterScreen"
+              component={RegisterScreen}
+              options={{
+                headerShown: true,
+                headerTitle: null,
+                headerBackTitleVisible: false
+              }} />
+            <Stack.Screen
+              name="MainFlow"
+              component={MainFlow}
+              options={{
+                headerShown: true,
+                headerTitle: null,
+                headerBackTitleVisible: false,
+                gestureEnabled: false,
+                headerLeft: null
+
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
+
 
   )
 }
