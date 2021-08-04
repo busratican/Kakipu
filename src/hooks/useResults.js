@@ -14,7 +14,6 @@ export default () => {
     try {
       await isbn.get(url)
         .then(response => {
-          console.log(response.data.book);
           setResults(response.data);
           setError('');
         }, error => {

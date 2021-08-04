@@ -1,37 +1,29 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
-import {Context as DialogContext} from '../context/DialogBoxContext';
+import { Context as DialogContext } from '../context/DialogBoxContext';
+import BookDetails from '../components/BookDetails';
+import { windowHeight, windowWidth} from './Dimensions';
 
 const DialogBox = ({ dialogTitle, buttonText, onPress, results }) => {
 
-    const {state: {dialogvisible}, stopdialog} = useContext(DialogContext);
+    const { state: { dialogvisible }, stopdialog } = useContext(DialogContext);
 
     return (
-        <View style = {styles.containerStyle}>
+        <View style={styles.containerStyle}>
             <Dialog
-                 containerStyle = {styles.dbContainer}
-                onTouchOutside = {stopdialog}
+                containerStyle={styles.dbContainer}
+                onTouchOutside={stopdialog}
                 visible={dialogvisible}
                 dialogAnimation={new SlideAnimation({
                     slideFrom: 'bottom',
                 })}
                 dialogTitle={<DialogTitle title={dialogTitle} />}
-                footer={
-                    <DialogFooter>
-                        <DialogButton
-                            text={buttonText}
-                            onPress={onPress}
-                        />
-                    </DialogFooter>
-                }
             >
-                {Object.keys(results).length > 0 ?  <DialogContent style = {styles.contentStyle}>
-                    {<View>
-                        <Text style={{color: 'black'}}>{results.book.title}</Text>
-                    </View>}
-                </DialogContent> : <> </>}
-               
+             {Object.keys(results).length > 0 ?<DialogContent style={styles.contentStyle}>
+                            <BookDetails results={results}/>
+                        </DialogContent> : <></>
+            }
             </Dialog>
         </View>
     )
@@ -45,12 +37,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     dbContainer: {
-        zIndex: 10, elevation: 10 
+        flex: 1,zIndex: 10, elevation: 10
     },
     contentStyle: {
+        flex:1,
         alignItems: 'center',
-        height: 300,
-        width: 300,
+        height: windowHeight - 20,
+        width: windowWidth - 20,
         marginHorizontal: 25
     }
 })
