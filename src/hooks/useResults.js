@@ -17,9 +17,11 @@ export default () => {
           setResults(response.data);
           setError('');
         }, error => {
+          console.log(error);
           setError(error);
         });
     } catch (err) {
+      console.log(err.Message);
       setError(err.Message);
     }
   };
