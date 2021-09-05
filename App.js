@@ -11,130 +11,127 @@ import DiscoverScreen from './src/screens/DiscoverScreen';
 import CreateNewScreen from './src/screens/CreateNewScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
-import { Provider as DialogProvider } from './src/context/DialogBoxContext';
-import { Provider as BarcodeProvider } from './src/context/BarcodeContext';
 import { Icon } from 'react-native-elements';
-import StarsScreen from './src/screens/StarsScreen';
+import MeetingScreen from './src/screens/MeetingScreen';
+import BarCodeScanScreen from './src/components/BarcodeScanner';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function StackScreen() {
   return (
-    <DialogProvider>
-      <Stack.Navigator
-        screenOptions={{
-          headerTransparent: true,
-          headerTintColor: '#000',
-          headerTitleStyle: {
-            fontWeight: 'bold'
-          },
-        }}
-      >
-        <Stack.Screen name="ResolveAuthScreen" component={ResolveAuthScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="FirstOpenScreen" component={FirstOpenScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen}
-          options={{
-            headerShown: true,
-            headerTitle: null,
-            headerBackTitleVisible: null,
-          }} />
-        <Stack.Screen
-          name="RegisterScreen" component={RegisterScreen}
-          options={{
-            headerShown: true,
-            headerTitle: null,
-            headerBackTitleVisible: false
-          }} />
-        <Stack.Screen name="MainFlow" component={MainFlow}
-          options={{
-            headerShown: true,
-            headerTitle: null,
-            headerBackTitleVisible: false,
-            gestureEnabled: false,
-            headerLeft: null
 
-          }}
-        />
-      </Stack.Navigator>
-    </DialogProvider>
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#000',
+        headerTitleStyle: {
+          fontWeight: 'bold'
+        },
+      }}
+    >
+      <Stack.Screen name="ResolveAuthScreen" component={ResolveAuthScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="FirstOpenScreen" component={FirstOpenScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen}
+        options={{
+          headerShown: true,
+          headerTitle: null,
+          headerBackTitleVisible: null,
+        }} />
+      <Stack.Screen
+        name="RegisterScreen" component={RegisterScreen}
+        options={{
+          headerShown: true,
+          headerTitle: null,
+          headerBackTitleVisible: false
+        }} />
+    </Stack.Navigator>
   )
+}
+
+function CreateNewFlow() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="CreateNewScreen" component={CreateNewScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false,
+          gestureEnabled: true
+        }}
+      />
+      <Stack.Screen name="BarCodeScanScreen" component={BarCodeScanScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false
+        }} />
+    </Stack.Navigator>);
 }
 
 function HomeTabs() {
   return (
+    <Tab.Navigator >
+      <Tab.Screen name="HomeScreen" component={HomeScreen}
+        options={{
+          tabBarLabel: 'Anasayfa',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='home'
+              type='feather' />
+          ),
+        }}
+      />
+      <Tab.Screen name="DiscoverScreen" component={DiscoverScreen}
+        options={{
+          tabBarLabel: 'Keşfet',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='compass'
+              type='feather' />
+          ),
+        }}
+      />
+      <Tab.Screen name="CreateNewFlow" component={CreateNewFlow}
+        options={({ route }) => ({
+          tabBarLabel: 'Yeni',
+          tabBarVisible: false,
+          headerBackTitleVisible: false,
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='pluscircleo'
+              type='antdesign' />
+          ),
+        })}
+      />
+      <Tab.Screen name='MeetingScreen' component={MeetingScreen}
+        options={{
+          tabBarLabel: 'Toplantı',
+          tabBarIcon: ({ color, size }) => (
+            <Icon size={30} name="clockcircleo" type="antdesign" />
+          ),
+        }}
+      />
+      <Tab.Screen name="ProfileScreen" component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profil',
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              size={30}
+              name='user'
+              type='antdesign' />
+          ),
+        }}
+      />
 
-
-    <BarcodeProvider>
-      <Tab.Navigator >
-        <Tab.Screen name="HomeScreen" component={HomeScreen}
-          options={{
-            tabBarLabel: 'Anasayfa',
-            tabBarIcon: ({ color, size }) => (
-              <Icon
-                size={30}
-                name='home'
-                type='feather' />
-            ),
-          }}
-        />
-        <Tab.Screen name="DiscoverScreen" component={DiscoverScreen}
-          options={{
-            tabBarLabel: 'Keşfet',
-            tabBarIcon: ({ color, size }) => (
-              <Icon
-                size={30}
-                name='compass'
-                type='feather' />
-            ),
-          }}
-        />
-        <Tab.Screen name="CreateNewScreen" component={CreateNewScreen}
-          options={({ route }) => ({
-            tabBarLabel: 'Yeni',
-            tabBarIcon: ({ color, size }) => (
-              <Icon
-                size={30}
-                name='pluscircleo'
-                type='antdesign' />
-            ),
-          })}
-        />
-        <Tab.Screen name='StarsScreen' component={StarsScreen}
-          options={{
-            tabBarLabel: 'Yıldızlar',
-            tabBarIcon: ({ color, size }) => (
-              <Icon
-                size={30}
-                name='staro'
-                type='antdesign' />
-            ),
-          }}
-        />
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen}
-          options={{
-            tabBarLabel: 'Profil',
-            tabBarIcon: ({ color, size }) => (
-              <Icon
-                size={30}
-                name='user'
-                type='antdesign' />
-            ),
-          }}
-        />
-
-      </Tab.Navigator>
-    </BarcodeProvider>
-
-
-
+    </Tab.Navigator>
   )
 }
 
-
 function App() {
   return (
-
     <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator
@@ -158,8 +155,6 @@ function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
-
-
   )
 }
 

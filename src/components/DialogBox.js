@@ -1,29 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
-import { Context as DialogContext } from '../context/DialogBoxContext';
 import BookDetails from '../components/BookDetails';
 import { windowHeight, windowWidth } from './Dimensions';
 import { Icon } from 'react-native-elements';
 
 const DialogBox = ({ dialogTitle, results }) => {
+    const [dialogvisible, setDialogVisible] = useState(true);
 
-    const { state: { dialogvisible }, stopdialog } = useContext(DialogContext);
+    console.log("DialogVisible: " + dialogvisible);
 
+    useEffect(() => {
+        setDialogVisible(true)
+    });
+    
     return (
         <View style={styles.containerStyle}>
             <Dialog
                 containerStyle={styles.dbContainer}
-                onTouchOutside={stopdialog}
+                onTouchOutside={() => setDialogVisible(false)}
                 visible={dialogvisible}
                 dialogAnimation={new SlideAnimation({
                     slideFrom: 'bottom',
                 })}
                 dialogTitle={<DialogTitle title={dialogTitle} />}
             >
-                <Icon name='cross' type='entypo' size={30} style={{ alignItems: 'flex-end', marginRight: 25 }}  onPress={stopdialog}/>
+                <Icon name='cross' type='entypo' size={30} style={{ alignItems: 'flex-end', marginRight: 25 }} onPress={() => setDialogVisible(false)}/>
                 {Object.keys(results).length > 0 ? <DialogContent style={styles.contentStyle}>
-
                     <BookDetails results={results} />
                 </DialogContent> : <></>
                 }

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 
-const StarsScreen = () => {
+const MeetingScreen = () => {
     return (
         <View>
-           <Text>CreateNew Screen</Text>
+           <Text>Meeting Screen</Text>
         </View>
     )
 
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default StarsScreen;
+export default MeetingScreen;

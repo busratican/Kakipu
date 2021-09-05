@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { Divider, Avatar, Card, Button, Icon } from 'react-native-elements';
+import { Divider, Avatar, Card, Icon } from 'react-native-elements';
 import { Dimensions } from 'react-native';
-import SpecialButton from '../components/Button';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

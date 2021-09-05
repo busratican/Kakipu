@@ -1,26 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../components/SearchBar';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import useResults from '../hooks/useResults';
-import { windowWidth, windowHeight } from '../components/Dimensions';
 import Button from '../components/Button';
 import DialogBox from '../components/DialogBox';
-import { Context as DialogContext } from '../context/DialogBoxContext';
-
 import RNETabs from '../components/RNETabs';
+import {Icon} from 'react-native-elements';
 
 const BookSearchScreen = ({ navigation }) => {
   const [isbn, setIsbn] = useState('');
   const [searchApi, results, error] = useResults();
-  const { state: { dialogvisible }, startdialog } = useContext(DialogContext);
-
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      tabBarVisible: false,
-    });
-  })
-
 
   const renderButton = () => {
     let length = Object.keys(results).length;
@@ -29,24 +18,32 @@ const BookSearchScreen = ({ navigation }) => {
       return (
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <Text style={styles.textStyle}>{length} adet kitap bulundu.</Text>
-          <Button title="Göster" width={220} height={60} onPress={() => startdialog()} />
+          <Button title="Göster" width={220} height={60} />
         </View>)
     }
   }
   return (
-    <>
+    <View style={{flex:1}}>
+     <Icon 
+     containerStyle={{marginTop: 50, marginLeft:10, alignSelf: 'flex-start'}}
+     name='arrow-back'  
+     type='material'  
+     size={30}
+     onPress={() => {navigation.navigate("HomeScreen")}} />
         <RNETabs components={
           <SearchBar
             term={isbn}
             onTermChanged={setIsbn}
             onTermSubmitted={searchApi}
+            onPress = {() => navigation.navigate("BarCodeScanScreen")}
           />
-        }>
+        }
+        >
           {error ? <Text>{error}</Text> : <></>}
           {renderButton()}
           <DialogBox dialogTitle="Kitap" results={results} />
         </RNETabs>
-    </>
+    </View>
 
   );
 };

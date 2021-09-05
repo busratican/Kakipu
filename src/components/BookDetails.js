@@ -1,58 +1,50 @@
-import React, {useContext} from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { Card, Text } from 'react-native-elements';
 import { windowWidth, windowHeight } from './Dimensions';
 import SpecialButton from './Button';
 
 
 const BookDetails = ({ results }) => {
-
   return (
     <View style={styles.containerStyle}>
-
       {Object.keys(results).length > 0 ? Object.values(results).map((item) => {
-        console.log(item);
         return (
-          <View style={{ marginBottom: 40 }}>
-            
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 30 }}>
-              <ImageBackground source={require('../../assets/shelf.jpg')} resizeMode="cover" style={styles.image}>
-                <Card containerStyle={styles.cardStyle}>
-                  <Card.Image
-                    style={styles.imageStyle}
-                    source={{
-                      uri: item.image
-                    }}
-                  />
-                </Card>
-              </ImageBackground>
-
-              <View style={{ justifyContent: 'flex-start', flexDirection: 'column', flex: 1, marginTop: 30, marginBottom: 10 }}>
-                <Text style={[styles.textStyle, { fontWeight: 'bold', marginVertical: 2, marginHorizontal: 30, fontSize: 16 }]}>
-                  {item.title}
-                </Text>
-                <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
-                  Yazar: {item.authors[0]}
-                </Text>
-                <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
-                  Sayfa: {item.pages}
-                </Text>
-                <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
-                  Yayınevi: {item.publisher}
-                </Text>
-                <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
-                  Yayın Tarihi: {item.date_published}
-                </Text>
-                <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
-                  ISBN: {item.isbn}
-                </Text>
-              </View>
-              <SpecialButton
-                width={220}
-                height={60}
-                title="Kütüphaneme Ekle"
-                onPress={() => { }}
-              />
+          <View style={styles.innerContainerStyle}>
+            <Card containerStyle={styles.cardStyle}>
+              {item.image != null && item.image != '' ? (<Card.Image
+                style={styles.imageStyle}
+                source={{ uri: item.image }}
+              />) :
+                (<Card.Image
+                  style={styles.imageStyle}
+                  source={require('../../assets/bookcover.jpg')}
+                />)}
+            </Card>
+            <SpecialButton
+              width={220}
+              height={60}
+              title="Kütüphaneme Ekle"
+            />
+            <View style={{ justifyContent: 'flex-start', flexDirection: 'column', flex: 1, marginTop: 10, marginBottom: 10 }}>
+              <Text style={[styles.textStyle, { fontWeight: 'bold', marginVertical: 2, marginHorizontal: 30, fontSize: 16 }]}>
+                {item.title}
+              </Text>
+              <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
+                Yazar: {item.authors[0]}
+              </Text>
+              <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
+                Sayfa: {item.pages}
+              </Text>
+              <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
+                Yayınevi: {item.publisher}
+              </Text>
+              <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
+                Yayın Tarihi: {item.date_published}
+              </Text>
+              <Text style={[styles.textStyle, { marginVertical: 2, marginHorizontal: 30 }]}>
+                ISBN: {item.isbn}
+              </Text>
             </View>
           </View>
         )
@@ -79,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   cardStyle: {
-    marginTop: windowHeight / 12.5,
+    marginTop: windowHeight / 20,
     padding: 0,
     borderLeftWidth: 8,
     borderTopWidth: 4,
