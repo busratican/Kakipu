@@ -7,6 +7,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import ProfileSettingScreen from './src/screens/ProfileSettingScreen';
 import DiscoverScreen from './src/screens/DiscoverScreen';
 import CreateNewScreen from './src/screens/CreateNewScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
@@ -66,6 +67,23 @@ function CreateNewFlow() {
         }} />
     </Stack.Navigator>);
 }
+function ProfileScreenFlow() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ProfileScreen" component={ProfileScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false,
+          gestureEnabled: true
+        }}
+      />
+      <Stack.Screen name="ProfileSettingScreen" component={ProfileSettingScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false
+        }} />
+    </Stack.Navigator>);
+}
 
 function HomeTabs() {
   return (
@@ -114,7 +132,7 @@ function HomeTabs() {
           ),
         }}
       />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen}
+      <Tab.Screen name="ProfileScreenFlow" component={ProfileScreenFlow}
         options={{
           tabBarLabel: 'Profil',
           tabBarIcon: ({ color, size }) => (

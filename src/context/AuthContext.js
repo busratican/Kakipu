@@ -38,7 +38,7 @@ const signup = (dispatch) => async ({email, password, navigation}) => {
         const uid = await AsyncStorage.getItem('uid');
         dispatch({type: 'signin', payload: uid});
         //navigate main flow
-        navigation.navigate('MainFlow', { screen: 'HomeScreen' });
+        navigation.navigate('MainFlow', { screen: 'ProfileSettingScreen' });
     }catch(err){
         console.log(err.message);
         dispatch({type: 'add_error', payload:'Something went wrong with sign up.'});

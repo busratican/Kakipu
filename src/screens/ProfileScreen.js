@@ -8,6 +8,7 @@ import ProfileDetails from '../components/ProfileDetails';
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
+    
         <ProfileDetails
             book = {12}
             follow = {100}
@@ -23,10 +24,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
-  },
-
+  }
 });
 
 export default ProfileScreen;
