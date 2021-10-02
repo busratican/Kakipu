@@ -21,8 +21,6 @@ require('firebase/auth')
     firebase.app(); // if already initialized, use that one
  }
 
-  
-
 
   export const signUpEmailAndPassword = ({email, password}) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)

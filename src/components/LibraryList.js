@@ -1,16 +1,11 @@
 import React from 'react';
 import {
-  View,
   FlatList,
   StyleSheet,
-  Text,
-  Image,
   SafeAreaView,
-  StatusBar,
   Dimensions,
-  ImageBackground,
 } from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import { Card} from 'react-native-elements';
 import Tab from './ProfileTabs';
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,7 +16,7 @@ const DATA = [
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     title:
       'Pürdikkat - Odaklanma Becerisini Nasil Yitirdik, Nasil Geri Kazanabiliriz?',
-    img: 'https://www.yeniisfikirleri.net/wp-content/uploads/2019/08/18.png',
+    img: 'https://cdn.1000kitap.com/resimler/kitaplar/246583_e06c4_1596905721.jpg',
   },
 ];
 
@@ -37,11 +32,7 @@ const LibraryList = () => {
             data={DATA}
             keyExtractor={(result) => result.id}
             renderItem={({ item }) => {
-              return (
-                <ImageBackground
-                  source={require('../assets/shelf.jpg')}
-                  resizeMode="cover"
-                  style={styles.image}>
+              return (      
                   <Card containerStyle={styles.cardStyle}>
                     <Card.Image
                       style={styles.imageStyle}
@@ -49,7 +40,6 @@ const LibraryList = () => {
                         uri: item.img,
                       }}></Card.Image>
                   </Card>
-                </ImageBackground>
               );
             }}
           />
@@ -60,13 +50,17 @@ const LibraryList = () => {
 };
 
 const styles = StyleSheet.create({
-  tabStyle: {
+  container: {
+    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  tabStyle: {
+    justifyContent: 'flex-start',
+  },
   cardStyle: {
     marginLeft: windowWidth / 4,
-    marginTop: 100,
+    marginTop: 5,
     padding: 0,
     borderLeftWidth: 8,
     borderTopWidth: 4,
@@ -87,13 +81,11 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 130,
     height: 200,
-    alignSelf: 'center',
   },
   image: {
     marginTop: 30,
     width: windowWidth,
     height: 300,
-    alignSelf: 'center',
   },
 });
 
