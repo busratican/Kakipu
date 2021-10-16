@@ -9,11 +9,11 @@ const RNETabs = ({ components, barcodevisible }) => {
            <View style={{ flex: 1, marginTop: 100, justifyContent: 'flex-start', alignSelf: 'center', flexDirection: 'column' }}>
                 <Tab value={index} onChange={setIndex} indicatorStyle={{ backgroundColor: 'transparent'}} >
                     <Tab.Item 
-                    title="Yeni Kitap" 
+                    title="Kitap Ekle" 
                     titleStyle={{backgroundColor: 'transparent', color: 'black'}}
                     />
                     <Tab.Item 
-                    title="Yeni Toplantı" 
+                    title="Tartışma Başlat" 
                     titleStyle={{backgroundColor: 'transparent', color: 'black'}}/>
                 </Tab>
 

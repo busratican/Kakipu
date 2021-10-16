@@ -126,7 +126,7 @@ function HomeTabs() {
       />
       <Tab.Screen name='MeetingScreen' component={MeetingScreen}
         options={{
-          tabBarLabel: 'Toplantı',
+          tabBarLabel: 'Tartışma',
           tabBarIcon: ({ color, size }) => (
             <Icon size={30} name="clockcircleo" type="antdesign" />
           ),
